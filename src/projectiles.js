@@ -1,10 +1,10 @@
-import {H, PROJECTILE_ITERATIONS_PER_FRAME, PROJECTILE_ITERATION_PROGRESS, PROJECTILE_MAX_SOUND_FREQUENCY, PROJECTILE_MIN_SOUND_FREQUENCY, PROJECTILE_POWER_REDUCTION_FACTOR, PROJECTILE_WIND_REDUCTION_FACTOR, WEAPON_TYPES} from './constants.js';
-import {checkLineWith, drawLineVirtual} from './gfx.js';
-import {createParticles, isTank, isTankShield} from './main.js';
-import {deg2rad, parable} from './math.js';
-import {audio, createOsc} from './sound.js';
-import {isTerrain, landHeight} from './terrain.js';
-import {EXPLOSION_TYPES} from './weapons.js';
+import { H, PROJECTILE_ITERATIONS_PER_FRAME, PROJECTILE_ITERATION_PROGRESS, PROJECTILE_MAX_SOUND_FREQUENCY, PROJECTILE_MIN_SOUND_FREQUENCY, PROJECTILE_POWER_REDUCTION_FACTOR, PROJECTILE_WIND_REDUCTION_FACTOR, WEAPON_TYPES } from './constants.js';
+import { checkLineWith, drawLineVirtual } from './gfx.js';
+import { createParticles, isTank, isTankShield } from './main.js';
+import { deg2rad, parable } from './math.js';
+import { audio, createOsc } from './sound.js';
+import { isTerrain, landHeight } from './terrain.js';
+import { EXPLOSION_TYPES } from './weapons.js';
 
 
 export const PROJECTILE_TYPES = {
@@ -15,25 +15,33 @@ export const PROJECTILE_TYPES = {
 
       return [{
         type: 'normal',
-        player, weapon,
-        x:ox, y:oy, ox, oy, a, p,
-        t: 0, osc, wind,
+        player,
+        weapon,
+        x: ox,
+        y: oy,
+        ox,
+        oy,
+        a,
+        p,
+        t: 0,
+        osc,
+        wind,
       }];
     },
     stop(projectile) {
       projectile.osc.stop(0);
     },
     update(projectile, terrain, projectiles, trajectories, explosions) {
-      const prevProjectile = {...projectile};
-      const {weapon, player, wind} = projectile;
+      const prevProjectile = { ...projectile };
+      const { weapon, player, wind } = projectile;
       const weaponType = WEAPON_TYPES[weapon.type];
       let exploded = false;
 
-      for (let i=0; i<PROJECTILE_ITERATIONS_PER_FRAME; i++) {
-        const {ox, oy, a, p, t} = projectile;
+      for (let i = 0; i < PROJECTILE_ITERATIONS_PER_FRAME; i++) {
+        const { ox, oy, a, p, t } = projectile;
 
         const [x, y] = parable(
-          t, ox, oy, deg2rad(180+a),
+          t, ox, oy, deg2rad(180 + a),
           p / PROJECTILE_POWER_REDUCTION_FACTOR,
           wind / PROJECTILE_WIND_REDUCTION_FACTOR,
         );
@@ -56,7 +64,7 @@ export const PROJECTILE_TYPES = {
             break;
           } else if (shieldHit.shieldType.projectileEffect === 'spring') {
             projectile.ox = projectile.x;
-            projectile.oy = projectile.y -1;
+            projectile.oy = projectile.y - 1;
             projectile.t = 0;
             break;
           }
@@ -83,8 +91,8 @@ export const PROJECTILE_TYPES = {
       );
 
       trajectory
-        .slice(0, trajectory.length-1) // Cut last pixel to prevent overlap
-        .map(x => ({...x, a:255}))     // Add alpha to all lines
+        .slice(0, trajectory.length - 1) // Cut last pixel to prevent overlap
+        .map(x => ({ ...x, a: 255 })) // Add alpha to all lines
         .forEach(x => trajectories.push(x));
 
       return !exploded;
@@ -98,9 +106,17 @@ export const PROJECTILE_TYPES = {
 
       return [{
         type: 'roller',
-        player, weapon,
-        x:ox, y:oy, ox, oy, a, p,
-        t: 0, osc, wind,
+        player,
+        weapon,
+        x: ox,
+        y: oy,
+        ox,
+        oy,
+        a,
+        p,
+        t: 0,
+        osc,
+        wind,
         state: 'flying',
         d: 0,
       }];
@@ -109,16 +125,16 @@ export const PROJECTILE_TYPES = {
       projectile.osc.stop(0);
     },
     update(projectile, terrain, projectiles, trajectories, explosions) {
-      const prevProjectile = {...projectile};
-      const {state, weapon, player, wind} = projectile;
+      const prevProjectile = { ...projectile };
+      const { state, weapon, player, wind } = projectile;
       const weaponType = WEAPON_TYPES[weapon.type];
       let finished = false;
 
       if (state === 'flying') {
-        const {ox, oy, a, p, t} = projectile;
-        for (let i=0; i<PROJECTILE_ITERATIONS_PER_FRAME; i++) {
+        const { ox, oy, a, p, t } = projectile;
+        for (let i = 0; i < PROJECTILE_ITERATIONS_PER_FRAME; i++) {
           let [x, y] = parable(
-            t, ox, oy, deg2rad(180+a),
+            t, ox, oy, deg2rad(180 + a),
             p / PROJECTILE_POWER_REDUCTION_FACTOR,
             wind / PROJECTILE_WIND_REDUCTION_FACTOR,
           );
@@ -135,7 +151,7 @@ export const PROJECTILE_TYPES = {
                   projectile.x = prevPoint.x;
                   projectile.y = prevPoint.y;
                 }
-                prevPoint = {x, y};
+                prevPoint = { x, y };
               }
             );
           } else {
@@ -165,14 +181,14 @@ export const PROJECTILE_TYPES = {
             projectile.state = 'explode';
             break;
           } else {
-            const hitLeft = isTerrain(terrain, x-1, y) || isTerrain(terrain, x-1, y+1);
-            const hitRight = isTerrain(terrain, x+1, y) || isTerrain(terrain, x+1, y+1);
-            const hitBottom = isTerrain(terrain, x, y+1);
+            const hitLeft = isTerrain(terrain, x - 1, y) || isTerrain(terrain, x - 1, y + 1);
+            const hitRight = isTerrain(terrain, x + 1, y) || isTerrain(terrain, x + 1, y + 1);
+            const hitBottom = isTerrain(terrain, x, y + 1);
             if (hitLeft || hitRight || hitBottom) {
               projectile.state = 'rolling';
               projectile.d = (
-                hitLeft? 1 :
-                hitRight? -1 :
+                hitLeft ? 1 :
+                hitRight ? -1 :
                 Math.sign(projectile.x - prevProjectile.x)
               );
               break;
@@ -182,8 +198,8 @@ export const PROJECTILE_TYPES = {
       }
 
       else if (state === 'rolling') {
-        const {x, y, d} = projectile;
-        const nextY = landHeight(terrain, x+d);
+        const { x, y, d } = projectile;
+        const nextY = landHeight(terrain, x + d);
 
         if (nextY < y || y > H || isTank(x, y)) {
           projectile.state = 'explode';
@@ -194,7 +210,7 @@ export const PROJECTILE_TYPES = {
       }
 
       else if (state === 'explode') {
-        const {x, y, p} = projectile;
+        const { x, y, p } = projectile;
         const explosionSpec = weaponType.explosion;
         const explosionType = EXPLOSION_TYPES[explosionSpec.type];
         explosions.push(explosionType.create(explosionSpec, x, y));
@@ -216,8 +232,8 @@ export const PROJECTILE_TYPES = {
       );
 
       trajectory
-        .slice(0, trajectory.length-1) // Cut last pixel to prevent overlap
-        .map(x => ({...x, a:255}))     // Add alpha to all lines
+        .slice(0, trajectory.length - 1) // Cut last pixel to prevent overlap
+        .map(x => ({ ...x, a: 255 })) // Add alpha to all lines
         .forEach(x => trajectories.push(x));
 
       return !finished;
@@ -226,15 +242,13 @@ export const PROJECTILE_TYPES = {
 
   mirv: {
     create(spec, player, weapon, ox, oy, a, p, wind) {
-      const {n, s} = spec;
+      const { n, s } = spec;
       const projectiles = [];
       const normalType = PROJECTILE_TYPES.normal;
 
-      for (let i=0; i<n; i++) {
+      for (let i = 0; i < n; i++) {
         projectiles.push(
-          normalType.create(
-            {}, player, weapon, ox, oy, a, p, wind-s*i
-          )[0]
+          normalType.create({}, player, weapon, ox, oy, a, p, wind - s * i)[0]
         );
       }
 
@@ -246,25 +260,31 @@ export const PROJECTILE_TYPES = {
 
   leapfrog: {
     create(spec, player, weapon, ox, oy, a, p, wind) {
-      const {n, s} = spec;
+      const { n, s } = spec;
 
       return [{
-        type:'leapfrog',
-        n, s, payload:null,
-        player, weapon, ox, oy, a, p, wind,
+        type: 'leapfrog',
+        n,
+        s,
+        payload: null,
+        player,
+        weapon,
+        ox,
+        oy,
+        a,
+        p,
+        wind,
       }];
     },
     stop() {},
     update(projectile, terrain, projectiles, trajectories, explosions) {
-      const {player, weapon, ox, oy, a, p, wind, n, s} = projectile;
+      const { player, weapon, ox, oy, a, p, wind, n, s } = projectile;
       const projectileType = PROJECTILE_TYPES.normal;
 
       // FIXME: Ugly
       if (!projectile.payload) {
         projectile.n--;
-        projectile.payload = projectileType.create(
-          {}, player, weapon, ox, oy, a, p, wind,
-        )[0];
+        projectile.payload = projectileType.create({}, player, weapon, ox, oy, a, p, wind, )[0];
       }
 
       const alive = projectileType.update(
@@ -276,8 +296,7 @@ export const PROJECTILE_TYPES = {
         if (n <= 0) return;
 
         projectile.n--;
-        projectile.payload = projectileType.create(
-          {}, player, weapon, projectile.payload.x, projectile.payload.y-2, a, p-s*n, wind, // FIXME: Y Hack
+        projectile.payload = projectileType.create({}, player, weapon, projectile.payload.x, projectile.payload.y - 2, a, p - s * n, wind, // FIXME: Y Hack
         )[0];
       }
 

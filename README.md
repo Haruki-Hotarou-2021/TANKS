@@ -12,8 +12,10 @@ Tanks take turns to shoot at other tanks. The last surviving tank wins the round
 
 | Key | Function | With Shift | With Alt |
 |-|-|-|-|
-| Up/Down | Increase/decrease firing power | Increase/decrease by 10 | Increase/decrease slowly |
-| Left/Right | Aim higher/lower | Increase/decrease by 10 | Increase/decrease slowly |
+| Up / W | Increase firing power | Increase by 10 | Increase slowly |
+| Down / S | decrease firing power | decrease by 10 | decrease slowly |
+| Left / A | Aim higher | Increase by 10 | Increase slowly |
+| Right / D | Aim lower | decrease by 10 | decrease slowly |
 | Tab | Switch to your next weapon | Switch to your previous weapon | |
 
 ## Features
