@@ -1,3 +1,7 @@
+// Set fullscreen
+document.documentElement.requestFullscreen();
+
+
 // Device Detection
 let mobileDevice;
 
