@@ -80,7 +80,9 @@ function initPlayers() {
       currentWeapon: 0,
       energy: PLAYER_MAX_ENERGY,
       shield: { type: 'springShield', energy: SHIELD_TYPES.springShield.energy },
-      ai: i !== 0 && i !== 1 ? sample(Object.keys(AI_TYPES)) : undefined,
+      
+      // 0 = red, 1 = blue, 2 = green, 3 = yellow, 4 = pink, 5 = purple
+      ai: i !== 0 && i !== 5 ? sample(Object.keys(AI_TYPES)) : undefined,
       parachute: null,
       fallHeight: 0,
     });
