@@ -81,10 +81,10 @@ export const DEATH_SPECS = [
   { type: 'digBomb', r: 25 },
   { type: 'digBomb', r: 50 },
   { type: 'digBomb', r: 75 },
-  { type: 'dirtCone', r: 50 },
+  /*{ type: 'dirtCone', r: 50 },
   { type: 'dirtCone', r: 100 },
   { type: 'dirtCone', r: 200 },
-  { type: 'dirtCone', r: H },
+  { type: 'dirtCone', r: H },*/
 ];
 
 export const PLAYER_STARTING_TOOLS = [
