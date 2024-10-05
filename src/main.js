@@ -2,7 +2,7 @@ import { mobileDevice, gamepad } from './mobile-controls.js';
 
 //console.log("Está em um dispositivo móvel:", mobileDevice);
 if (mobileDevice) {
-  gamepad();
+  //gamepad();
 }
 
 
@@ -80,7 +80,7 @@ function initPlayers() {
       currentWeapon: 0,
       energy: PLAYER_MAX_ENERGY,
       shield: { type: 'springShield', energy: SHIELD_TYPES.springShield.energy },
-      ai: i !== 0 ? sample(Object.keys(AI_TYPES)) : undefined,
+      ai: i !== 0 && i !== 1 ? sample(Object.keys(AI_TYPES)) : undefined,
       parachute: null,
       fallHeight: 0,
     });
