@@ -2,7 +2,7 @@
 
 A modern [Scorched Earth](https://en.wikipedia.org/wiki/Scorched_Earth_(video_game)) clone.
 
-[Play it for free on itch.io](https://pastry.itch.io/ravaged-planet)
+[Play it for free on github pages](https://haruki-hotarou-2021.github.io/TANKS/)
 
 ![A screenshot of the game](docs/screenshot.png)
 
@@ -17,6 +17,7 @@ Tanks take turns to shoot at other tanks. The last surviving tank wins the round
 | Left / A | Aim higher | Increase by 10 | Increase slowly |
 | Right / D | Aim lower | decrease by 10 | decrease slowly |
 | Tab | Switch to your next weapon | Switch to your previous weapon | |
+| Space | Shoot | | |
 
 ## Features
 
