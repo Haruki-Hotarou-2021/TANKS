@@ -1,8 +1,9 @@
-import { mobileDevice, gamepad } from './mobile-controls.js';
+import { mobileDevice, gamepad, mobileMode } from './mobile-controls.js';
 
 //console.log("Está em um dispositivo móvel:", mobileDevice);
 if (mobileDevice) {
   //gamepad();
+  mobileMode();
 }
 
 
@@ -534,7 +535,7 @@ function drawStatus() {
   const { currentWeapon } = player;
   const weapon = player.weapons[currentWeapon];
   const weaponType = WEAPON_TYPES[weapon.type];
-  drawText(foreground, `${player.name}   NRG:${player.energy}   AIM:${player.a}   PWR:${player.p}   SHD:${player.shield?player.shield.energy:0}   ${clamp(0, weapon.ammo, 99)} ${weaponType.name}`, 8, 8, player.c, 'left');
+  drawText(foreground, `${player.name}   ENERGY:${player.energy}   AIM:${player.a}   POWER:${player.p}   SHILD:${player.shield?player.shield.energy:0}   ${clamp(0, weapon.ammo, 99)} ${weaponType.name}`, 8, 8, player.c, 'left');
   drawText(foreground, `WIND: ${wind<=0?'<':''}${Math.abs(wind)}${wind>=0?'>':''}`, W - 8, 8, 'white', 'right');
 }
 

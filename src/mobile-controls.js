@@ -1,5 +1,5 @@
 // Set fullscreen
-document.documentElement.requestFullscreen();
+//document.documentElement.requestFullscreen();
 
 
 // Device Detection
@@ -71,4 +71,17 @@ export function gamepad() {
   document.body.style.height = '100vh';
   document.body.style.overflow = 'hidden';
 
+}
+
+export function mobileMode() {
+  
+//document.body.style.transform = 'scale(0.2813)';
+//document.body.style.transformOrigin = '0 0';
+
+const body = document.body.style;
+
+body.transform = 'rotate(90deg) scale(0.4)';
+body.transformOrigin = '57% 32%';
+body.width = '100vh';
+body.height = '100vw';
 }
