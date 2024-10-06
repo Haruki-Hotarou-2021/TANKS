@@ -73,15 +73,17 @@ export function gamepad() {
 
 }
 
+/*
 export function mobileMode() {
-  
-//document.body.style.transform = 'scale(0.2813)';
-//document.body.style.transformOrigin = '0 0';
 
-const body = document.body.style;
+  //document.body.style.transform = 'scale(0.2813)';
+  //document.body.style.transformOrigin = '0 0';
 
-body.transform = 'rotate(90deg) scale(0.4)';
-body.transformOrigin = '57% 32%';
-body.width = '100vh';
-body.height = '100vw';
+  const body = document.body.style;
+
+  body.transform = 'rotate(90deg) scale(0.4)';
+  body.transformOrigin = '57% 32%';
+  body.width = '100vh';
+  body.height = '100vw';
 }
+*/
