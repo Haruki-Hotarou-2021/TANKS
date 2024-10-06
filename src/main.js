@@ -3,7 +3,7 @@ import { mobileDevice, gamepad, mobileMode } from './mobile-controls.js';
 //console.log("Está em um dispositivo móvel:", mobileDevice);
 if (mobileDevice) {
   //gamepad();
-  mobileMode();
+  //mobileMode();
 }
 
 
