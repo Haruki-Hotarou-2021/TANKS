@@ -61,7 +61,7 @@ export const WEAPON_TYPES = {
   largeDirt: { id: 'largeDirt', name: 'Ton of Dirt', projectile: { type: 'normal' }, explosion: { type: 'dirt', r: 75 } },
   smallDigBomb: { id: 'smallDigBomb', name: 'Small Dig Bomb', projectile: { type: 'normal' }, explosion: { type: 'digBomb', r: 25 } },
   digBomb: { id: 'digBomb', name: 'Dig Bomb', projectile: { type: 'normal' }, explosion: { type: 'digBomb', r: 50 } },
-  largeDigBomb: { id: 'largeDigBomb', name: 'Large Dig Bomb', projectile: { type: 'normal' }, explosion: { type: 'digBomb', r: 150 } }, //75
+  largeDigBomb: { id: 'largeDigBomb', name: 'Large Dig Bomb', projectile: { type: 'normal' }, explosion: { type: 'digBomb', r: 75 } },
 };
 
 export const SHIELD_TYPES = {
