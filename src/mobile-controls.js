@@ -73,9 +73,9 @@ export function gamepad() {
 
 }
 
-/*
-export function mobileMode() {
 
+export function mobileMode() {
+/*
   //document.body.style.transform = 'scale(0.2813)';
   //document.body.style.transformOrigin = '0 0';
 
@@ -85,5 +85,5 @@ export function mobileMode() {
   body.transformOrigin = '57% 32%';
   body.width = '100vh';
   body.height = '100vw';
+  */
 }
-*/
