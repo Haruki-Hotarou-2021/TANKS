@@ -1,7 +1,7 @@
-import { SOUND_MUSIC_VOLUME, SOUND_SFX_VOLUME } from './constants.js';
+import {SOUND_MUSIC_VOLUME, SOUND_SFX_VOLUME} from './constants.js';
 
 // @ts-ignore
-export const audio = new(window.AudioContext || window.webkitAudioContext)();
+export const audio = new (window.AudioContext || window.webkitAudioContext)();
 export const volume = createGain(1);
 volume.connect(audio.destination);
 
@@ -27,7 +27,7 @@ export async function createAudioLoop(src) {
   })
 }
 
-export function createOsc(type = 'triangle') {
+export function createOsc(type='triangle') {
   const osc = audio.createOscillator();
   osc.type = type;
   osc.connect(sfx);
